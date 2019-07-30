@@ -32,6 +32,12 @@
         </div>
     </div>
     
+    <form id="sport-form">
+            <label for="sport-input">Add a sport!</label>
+            <input type="text" id="sport-input">
+            <input id="add-sport" type="submit" value="Add a sport!">
+    </form>
+
     <div id="images"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -40,12 +46,18 @@
         // Initial buttons array
         var sportsButtons = ["NFL Football", "NBA Basketball", "NHL Hockey", "MLS Soccer", "MLB Baseball", "Boxing", "UFC", "PGA Golf", "NASCAR", "X-Games"];
         
-        for(var i=0; i<sportsButtons.length; i++){
-            var sportButton = $("<button id='sports'>" + sportsButtons[i] + "</button>");
-            $("#buttonRow").append(sportButton);
-            
-        };
+        
+        
+        function renderButtons() {
 
+            $("#buttonRow").empty();
+
+            for(var i=0; i<sportsButtons.length; i++){
+                var sportButton = $("<button id='sports'>" + sportsButtons[i] + "</button>");
+                $("#buttonRow").append(sportButton);
+                
+            };
+        };
 
 
         function sportsDisplay() { 
@@ -78,7 +90,16 @@
                 });
         };
 
+        $("#add-sport").on("click", function(event) {
 
+            event.preventDefault();
+            var newSport = $("#sport-input").val().trim();
+            sportsButtons.push(newSport);
+            renderButtons();
+
+        });
+
+        renderButtons();
         $(document).on("click", "#sports", sportsDisplay);
             
   </script>
