@@ -71,7 +71,7 @@
                 console.log(sport);
 
                 // Storing our giphy API URL 
-                var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&tag=" + sport;
+                var queryURL = "https://api.giphy.com/v1/gifs/random?rating=pg&limit=10&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&tag=" + sport;
 
                 // AJAX call
                 $.ajax({
@@ -97,6 +97,19 @@
             sportsButtons.push(newSport);
             renderButtons();
 
+        });
+
+        $(".gif").on("click", function() {
+            
+            var state = $(this).attr("data-state");
+            
+            if (state === "still") {
+                $(this).attr("src", $(this).attr("data-animate"));
+                $(this).attr("data-state", "animate");
+            } else {
+                $(this).attr("src", $(this).attr("data-still"));
+                $(this).attr("data-state", "still");
+            }
         });
 
         renderButtons();
