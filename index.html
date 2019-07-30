@@ -48,33 +48,38 @@
 
 
 
-        
-        $("#sports").on("click", function() {
+        function sportsDisplay() { 
 
-            
+            $(this).on("click", function(event) {
 
-            var sport = $("#sports").text();
+                
+                event.preventDefault();
+                var sport = $(this).text();
 
-            console.log(sport);
+                console.log(sport);
 
-            // Storing our giphy API URL 
-            var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&tag=" + sport;
+                // Storing our giphy API URL 
+                var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&tag=" + sport;
 
-            // AJAX call
-            $.ajax({
-                url: queryURL,
-                method: "GET"
-            })
-                .then(function(response) {
+                // AJAX call
+                $.ajax({
+                    url: queryURL,
+                    method: "GET"
+                })
+                    .then(function(response) {
 
-                    var imageUrl = response.data.image_original_url;
-                    var sportsImage = $("<img>");
-                    sportsImage.attr("src", imageUrl);
-                    sportsImage.attr("alt", "sports image");
-
-                    $("#images").prepend(sportsImage);
+                        var imageUrl = response.data.image_original_url;
+                        var sportsImage = $("<img>");
+                        sportsImage.attr("src", imageUrl);
+                        sportsImage.attr("alt", "sports image");
+                        $("#images").prepend(sportsImage);
+                        
+                    });
                 });
-            });
+        };
+
+
+        $(document).on("click", "#sports", sportsDisplay);
             
   </script>
 
