@@ -17,20 +17,50 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
-    <button id="sports">Football</button>
+    <div class="jumbotron">
+        <h1 class="display-3">The Sports Giphy Buttons</h1>
+        <p class="lead">These are buttons to illustrate an an example of the Giphy API.</p>
+        <hr class="my-2">
+        <p>Click a button to pull up GIF's!</p>
+    </div>
 
-        <div id="images"></div>
+    <div class="container" style="margin: 5px;">
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="buttonRow"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="images"></div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script type="text/javascript">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
 
-            // Event listener for our cat-button
-            $("#sports").on("click", function() {
+        // Initial buttons array
+        var sportsButtons = ["NFL Football", "NBA Basketball", "NHL Hockey", "MLS Soccer", "MLB Baseball", "Boxing", "UFC", "PGA Golf", "NASCAR", "X-Games"];
+        
+        for(var i=0; i<sportsButtons.length; i++){
+            var sportButton = $("<button id='sports'>" + sportsButtons[i] + "</button>");
+            $("#buttonRow").append(sportButton);
+            
+        };
 
-            // Storing our giphy API URL for a random sports image
-            var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&tag=nfl football";
 
-            // Perfoming an AJAX GET request to our queryURL
+
+        
+        $("#sports").on("click", function() {
+
+            
+
+            var sport = $("#sports").text();
+
+            console.log(sport);
+
+            // Storing our giphy API URL 
+            var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&tag=" + sport;
+
+            // AJAX call
             $.ajax({
                 url: queryURL,
                 method: "GET"
